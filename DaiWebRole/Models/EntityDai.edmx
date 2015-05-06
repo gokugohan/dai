@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="trabalhodaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Foto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Titulo" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Url" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="DataCriacao" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Galeria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Foto" Type="int" Nullable="false" />
+          <Property Name="Video" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_categoria">
+          <Key>
+            <PropertyRef Name="Id_categoria" />
+          </Key>
+          <Property Name="Id_categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_emprestimo">
+          <Key>
+            <PropertyRef Name="Id_emprestimo" />
+          </Key>
+          <Property Name="Id_emprestimo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_membro" Type="int" Nullable="false" />
+          <Property Name="Id_livro" Type="int" Nullable="false" />
+          <Property Name="Data_emprestimo" Type="date" Nullable="false" />
+          <Property Name="Data_devolucao" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_livro">
+          <Key>
+            <PropertyRef Name="Id_livro" />
+          </Key>
+          <Property Name="Id_livro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo_livro" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Capa_livro" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Categoria_Id" Type="int" Nullable="false" />
+          <Property Name="Autor_livro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Editora_livro" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Isbn" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="T_membro">
+          <Key>
+            <PropertyRef Name="Id_membro" />
+          </Key>
+          <Property Name="Id_membro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PrimeirNome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="UltimoNome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="foto" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Genero" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Endereco" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contacto" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Titulo" Type="nchar" MaxLength="150" Nullable="false" />
+          <Property Name="Url" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="DataCriacao" Type="datetime" />
+        </EntityType>
+        <Association Name="fk_emprestimo_livro">
+          <End Role="T_livro" Type="Self.T_livro" Multiplicity="1" />
+          <End Role="T_emprestimo" Type="Self.T_emprestimo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_livro">
+              <PropertyRef Name="Id_livro" />
+            </Principal>
+            <Dependent Role="T_emprestimo">
+              <PropertyRef Name="Id_livro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_emprestimo_membro">
+          <End Role="T_membro" Type="Self.T_membro" Multiplicity="1" />
+          <End Role="T_emprestimo" Type="Self.T_emprestimo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_membro">
+              <PropertyRef Name="Id_membro" />
+            </Principal>
+            <Dependent Role="T_emprestimo">
+              <PropertyRef Name="Id_membro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_livro_categoria">
+          <End Role="T_categoria" Type="Self.T_categoria" Multiplicity="1" />
+          <End Role="T_livro" Type="Self.T_livro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_categoria">
+              <PropertyRef Name="Id_categoria" />
+            </Principal>
+            <Dependent Role="T_livro">
+              <PropertyRef Name="Categoria_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Galeria_Foto_FK">
+          <End Role="Foto" Type="Self.Foto" Multiplicity="1" />
+          <End Role="Galeria" Type="Self.Galeria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Foto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Galeria">
+              <PropertyRef Name="Foto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Galeria_Video_FK">
+          <End Role="Video" Type="Self.Video" Multiplicity="1" />
+          <End Role="Galeria" Type="Self.Galeria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Galeria">
+              <PropertyRef Name="Video" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="trabalhodaiModelStoreContainer">
+          <EntitySet Name="Foto" EntityType="Self.Foto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Galeria" EntityType="Self.Galeria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_categoria" EntityType="Self.T_categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_emprestimo" EntityType="Self.T_emprestimo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_livro" EntityType="Self.T_livro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_membro" EntityType="Self.T_membro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Utilizador" EntityType="Self.Utilizador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Video" EntityType="Self.Video" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_emprestimo_livro" Association="Self.fk_emprestimo_livro">
+            <End Role="T_livro" EntitySet="T_livro" />
+            <End Role="T_emprestimo" EntitySet="T_emprestimo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_emprestimo_membro" Association="Self.fk_emprestimo_membro">
+            <End Role="T_membro" EntitySet="T_membro" />
+            <End Role="T_emprestimo" EntitySet="T_emprestimo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_livro_categoria" Association="Self.fk_livro_categoria">
+            <End Role="T_categoria" EntitySet="T_categoria" />
+            <End Role="T_livro" EntitySet="T_livro" />
+          </AssociationSet>
+          <AssociationSet Name="Galeria_Foto_FK" Association="Self.Galeria_Foto_FK">
+            <End Role="Foto" EntitySet="Foto" />
+            <End Role="Galeria" EntitySet="Galeria" />
+          </AssociationSet>
+          <AssociationSet Name="Galeria_Video_FK" Association="Self.Galeria_Video_FK">
+            <End Role="Video" EntitySet="Video" />
+            <End Role="Galeria" EntitySet="Galeria" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="trabalhodaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Foto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Galerias" Relationship="trabalhodaiModel.Galeria_Foto_FK" FromRole="Foto" ToRole="Galeria" />
+          <Property Name="DataCriacao" Type="DateTime" Precision="3" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="150" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Galerias" Relationship="trabalhodaiModel.Galeria_Video_FK" FromRole="Video" ToRole="Galeria" />
+          <Property Name="DataCriacao" Type="DateTime" Precision="3" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="EntityDai" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Fotos" EntityType="Self.Foto" />
+          <EntitySet Name="Videos" EntityType="Self.Video" />
+          <EntitySet Name="Galerias" EntityType="trabalhodaiModel.Galeria" />
+          <AssociationSet Name="Galeria_Foto_FK" Association="trabalhodaiModel.Galeria_Foto_FK">
+            <End Role="Foto" EntitySet="Fotos" />
+            <End Role="Galeria" EntitySet="Galerias" />
+          </AssociationSet>
+          <AssociationSet Name="Galeria_Video_FK" Association="trabalhodaiModel.Galeria_Video_FK">
+            <End Role="Video" EntitySet="Videos" />
+            <End Role="Galeria" EntitySet="Galerias" />
+          </AssociationSet>
+          <EntitySet Name="Categorias" EntityType="trabalhodaiModel.Categoria" />
+          <EntitySet Name="Emprestimos" EntityType="trabalhodaiModel.Emprestimo" />
+          <EntitySet Name="Livros" EntityType="trabalhodaiModel.Livro" />
+          <EntitySet Name="Membros" EntityType="trabalhodaiModel.Membro" />
+          <AssociationSet Name="fk_livro_categoria" Association="trabalhodaiModel.fk_livro_categoria">
+            <End Role="T_categoria" EntitySet="Categorias" />
+            <End Role="T_livro" EntitySet="Livros" />
+          </AssociationSet>
+          <AssociationSet Name="fk_emprestimo_livro" Association="trabalhodaiModel.fk_emprestimo_livro">
+            <End Role="T_livro" EntitySet="Livros" />
+            <End Role="T_emprestimo" EntitySet="Emprestimos" />
+          </AssociationSet>
+          <AssociationSet Name="fk_emprestimo_membro" Association="trabalhodaiModel.fk_emprestimo_membro">
+            <End Role="T_membro" EntitySet="Membros" />
+            <End Role="T_emprestimo" EntitySet="Emprestimos" />
+          </AssociationSet>
+          <EntitySet Name="Utilizadores" EntityType="trabalhodaiModel.Utilizador" />
+          </EntityContainer>
+        <EntityType Name="Galeria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Foto" Type="Int32" Nullable="false" />
+          <Property Name="Video" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Foto1" Relationship="trabalhodaiModel.Galeria_Foto_FK" FromRole="Galeria" ToRole="Foto" />
+          <NavigationProperty Name="Video1" Relationship="trabalhodaiModel.Galeria_Video_FK" FromRole="Galeria" ToRole="Video" />
+        </EntityType>
+        <Association Name="Galeria_Foto_FK">
+          <End Type="trabalhodaiModel.Foto" Role="Foto" Multiplicity="1" />
+          <End Type="trabalhodaiModel.Galeria" Role="Galeria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Foto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Galeria">
+              <PropertyRef Name="Foto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Galeria_Video_FK">
+          <End Type="trabalhodaiModel.Video" Role="Video" Multiplicity="1" />
+          <End Type="trabalhodaiModel.Galeria" Role="Galeria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Video">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Galeria">
+              <PropertyRef Name="Video" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id_categoria" />
+          </Key>
+          <Property Name="Id_categoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_livro" Relationship="trabalhodaiModel.fk_livro_categoria" FromRole="T_categoria" ToRole="T_livro" />
+        </EntityType>
+        <EntityType Name="Emprestimo">
+          <Key>
+            <PropertyRef Name="Id_emprestimo" />
+          </Key>
+          <Property Name="Id_emprestimo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_membro" Type="Int32" Nullable="false" />
+          <Property Name="Id_livro" Type="Int32" Nullable="false" />
+          <Property Name="Data_emprestimo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Data_devolucao" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="T_livro" Relationship="trabalhodaiModel.fk_emprestimo_livro" FromRole="T_emprestimo" ToRole="T_livro" />
+          <NavigationProperty Name="T_membro" Relationship="trabalhodaiModel.fk_emprestimo_membro" FromRole="T_emprestimo" ToRole="T_membro" />
+        </EntityType>
+        <EntityType Name="Livro">
+          <Key>
+            <PropertyRef Name="Id_livro" />
+          </Key>
+          <Property Name="Id_livro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo_livro" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Capa_livro" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Categoria_Id" Type="Int32" Nullable="false" />
+          <Property Name="Autor_livro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Editora_livro" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Isbn" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_categoria" Relationship="trabalhodaiModel.fk_livro_categoria" FromRole="T_livro" ToRole="T_categoria" />
+          <NavigationProperty Name="T_emprestimo" Relationship="trabalhodaiModel.fk_emprestimo_livro" FromRole="T_livro" ToRole="T_emprestimo" />
+        </EntityType>
+        <EntityType Name="Membro">
+          <Key>
+            <PropertyRef Name="Id_membro" />
+          </Key>
+          <Property Name="Id_membro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PrimeirNome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UltimoNome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="foto" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Genero" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Endereco" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Contacto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="T_emprestimo" Relationship="trabalhodaiModel.fk_emprestimo_membro" FromRole="T_membro" ToRole="T_emprestimo" />
+        </EntityType>
+        <Association Name="fk_livro_categoria">
+          <End Type="trabalhodaiModel.Categoria" Role="T_categoria" Multiplicity="1" />
+          <End Type="trabalhodaiModel.Livro" Role="T_livro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_categoria">
+              <PropertyRef Name="Id_categoria" />
+            </Principal>
+            <Dependent Role="T_livro">
+              <PropertyRef Name="Categoria_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_emprestimo_livro">
+          <End Type="trabalhodaiModel.Livro" Role="T_livro" Multiplicity="1" />
+          <End Type="trabalhodaiModel.Emprestimo" Role="T_emprestimo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_livro">
+              <PropertyRef Name="Id_livro" />
+            </Principal>
+            <Dependent Role="T_emprestimo">
+              <PropertyRef Name="Id_livro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_emprestimo_membro">
+          <End Type="trabalhodaiModel.Membro" Role="T_membro" Multiplicity="1" />
+          <End Type="trabalhodaiModel.Emprestimo" Role="T_emprestimo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_membro">
+              <PropertyRef Name="Id_membro" />
+            </Principal>
+            <Dependent Role="T_emprestimo">
+              <PropertyRef Name="Id_membro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Utilizador">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="trabalhodaiModelStoreContainer" CdmEntityContainer="EntityDai">
+          <EntitySetMapping Name="Fotos">
+            <EntityTypeMapping TypeName="trabalhodaiModel.Foto">
+              <MappingFragment StoreEntitySet="Foto">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Videos">
+            <EntityTypeMapping TypeName="trabalhodaiModel.Video">
+              <MappingFragment StoreEntitySet="Video">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Galerias">
+            <EntityTypeMapping TypeName="trabalhodaiModel.Galeria">
+              <MappingFragment StoreEntitySet="Galeria">
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="trabalhodaiModel.Categoria">
+              <MappingFragment StoreEntitySet="T_categoria">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id_categoria" ColumnName="Id_categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emprestimos">
+            <EntityTypeMapping TypeName="trabalhodaiModel.Emprestimo">
+              <MappingFragment StoreEntitySet="T_emprestimo">
+                <ScalarProperty Name="Data_devolucao" ColumnName="Data_devolucao" />
+                <ScalarProperty Name="Data_emprestimo" ColumnName="Data_emprestimo" />
+                <ScalarProperty Name="Id_livro" ColumnName="Id_livro" />
+                <ScalarProperty Name="Id_membro" ColumnName="Id_membro" />
+                <ScalarProperty Name="Id_emprestimo" ColumnName="Id_emprestimo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Livros">
+            <EntityTypeMapping TypeName="trabalhodaiModel.Livro">
+              <MappingFragment StoreEntitySet="T_livro">
+                <ScalarProperty Name="Isbn" ColumnName="Isbn" />
+                <ScalarProperty Name="Editora_livro" ColumnName="Editora_livro" />
+                <ScalarProperty Name="Autor_livro" ColumnName="Autor_livro" />
+                <ScalarProperty Name="Categoria_Id" ColumnName="Categoria_Id" />
+                <ScalarProperty Name="Capa_livro" ColumnName="Capa_livro" />
+                <ScalarProperty Name="Titulo_livro" ColumnName="Titulo_livro" />
+                <ScalarProperty Name="Id_livro" ColumnName="Id_livro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Membros">
+            <EntityTypeMapping TypeName="trabalhodaiModel.Membro">
+              <MappingFragment StoreEntitySet="T_membro">
+                <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
+                <ScalarProperty Name="UltimoNome" ColumnName="UltimoNome" />
+                <ScalarProperty Name="PrimeirNome" ColumnName="PrimeirNome" />
+                <ScalarProperty Name="Id_membro" ColumnName="Id_membro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilizadores">
+            <EntityTypeMapping TypeName="trabalhodaiModel.Utilizador">
+              <MappingFragment StoreEntitySet="Utilizador">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

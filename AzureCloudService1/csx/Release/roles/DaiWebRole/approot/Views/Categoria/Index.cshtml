@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DaiWebRole.Models.Categoria>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("Adicionar nova", "Novo")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id = item.Id_categoria }) |            
+            @Html.ActionLink("Eliminar", "Eliminar", new { id = item.Id_categoria })
+        </td>
+    </tr>
+}
+
+</table>

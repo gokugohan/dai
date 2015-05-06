@@ -1,0 +1,64 @@
+﻿@model DaiWebRole.Models.Livro
+
+@{
+    ViewBag.Title = "Requisitar";
+}
+
+<h2>Requisitar</h2>
+
+<div>
+    <hr />    
+    <dl class="dl-horizontal">
+        <dt>
+            <label>Título</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo_livro)
+        </dd>
+
+        <dt>
+            <label>Capa do livro</label>
+        </dt>
+
+        <dd>            
+            <img src="@Model.Capa_livro" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Autor_livro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Autor_livro)
+        </dd>
+
+        <dt>
+            <label>Editora</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Editora_livro)
+        </dd>
+
+        <dt>
+            <label>Isbn</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Isbn)
+        </dd>
+
+        <dt>
+            <label>Categoria</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_categoria.Nome)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Confirmar", "Index","Emprestimo", new { id = Model.Id_livro },null)    
+</p>

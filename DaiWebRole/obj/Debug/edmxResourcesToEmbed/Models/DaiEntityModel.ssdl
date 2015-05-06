@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="trabalhodaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="T_Foto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Legenda" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Galeria" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_Galeria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="T_Video">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Legenda" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Galeria" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="Foto_Galeria_FK">
+    <End Role="T_Galeria" Type="Self.T_Galeria" Multiplicity="1" />
+    <End Role="T_Foto" Type="Self.T_Foto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Galeria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_Foto">
+        <PropertyRef Name="Galeria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Video_Galeria_FK">
+    <End Role="T_Galeria" Type="Self.T_Galeria" Multiplicity="1" />
+    <End Role="T_Video" Type="Self.T_Video" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="T_Galeria">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="T_Video">
+        <PropertyRef Name="Galeria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="trabalhodaiModelStoreContainer">
+    <EntitySet Name="T_Foto" EntityType="Self.T_Foto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Galeria" EntityType="Self.T_Galeria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="T_Video" EntityType="Self.T_Video" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="Foto_Galeria_FK" Association="Self.Foto_Galeria_FK">
+      <End Role="T_Galeria" EntitySet="T_Galeria" />
+      <End Role="T_Foto" EntitySet="T_Foto" />
+    </AssociationSet>
+    <AssociationSet Name="Video_Galeria_FK" Association="Self.Video_Galeria_FK">
+      <End Role="T_Galeria" EntitySet="T_Galeria" />
+      <End Role="T_Video" EntitySet="T_Video" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

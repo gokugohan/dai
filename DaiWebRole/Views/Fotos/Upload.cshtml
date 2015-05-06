@@ -1,0 +1,64 @@
+﻿@model DaiWebRole.Models.FotoModel
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload foto</h2>
+
+<p>
+    @using (Html.BeginForm("Upload", "Fotos", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    @Html.LabelFor(m => m.ImageUpload, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ImageUpload, new { type = "file", htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImageUpload, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+
+    }
+</p>
+
+<ul style="list-style-type:none; padding:0;">
+    @*@foreach (var item in Model)
+        {
+            <li>
+                <img src="@item" alt="Fotos" width="100" height="100" />
+                <a id="@item" href="#" onclick="deleteFoto('@item')">Delete</a>
+            </li>
+        }*@
+</ul>
+
+<script>
+    function deleteFoto(item) {
+        var url = "/Fotos/DeleteFoto";
+        $.post(url, { Name: item }, function (data) {
+            window.location.href = "/Fotos/Upload";
+            alert(data);
+        });
+    }
+</script>
+

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="trabalhodaiModelStoreContainer" CdmEntityContainer="EntityDai">
+    <EntitySetMapping Name="Fotos">
+      <EntityTypeMapping TypeName="trabalhodaiModel.Foto">
+        <MappingFragment StoreEntitySet="Foto">
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Videos">
+      <EntityTypeMapping TypeName="trabalhodaiModel.Video">
+        <MappingFragment StoreEntitySet="Video">
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Galerias">
+      <EntityTypeMapping TypeName="trabalhodaiModel.Galeria">
+        <MappingFragment StoreEntitySet="Galeria">
+          <ScalarProperty Name="Video" ColumnName="Video" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categorias">
+      <EntityTypeMapping TypeName="trabalhodaiModel.Categoria">
+        <MappingFragment StoreEntitySet="T_categoria">
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Id_categoria" ColumnName="Id_categoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Emprestimos">
+      <EntityTypeMapping TypeName="trabalhodaiModel.Emprestimo">
+        <MappingFragment StoreEntitySet="T_emprestimo">
+          <ScalarProperty Name="Data_devolucao" ColumnName="Data_devolucao" />
+          <ScalarProperty Name="Data_emprestimo" ColumnName="Data_emprestimo" />
+          <ScalarProperty Name="Id_livro" ColumnName="Id_livro" />
+          <ScalarProperty Name="Id_membro" ColumnName="Id_membro" />
+          <ScalarProperty Name="Id_emprestimo" ColumnName="Id_emprestimo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Livros">
+      <EntityTypeMapping TypeName="trabalhodaiModel.Livro">
+        <MappingFragment StoreEntitySet="T_livro">
+          <ScalarProperty Name="Isbn" ColumnName="Isbn" />
+          <ScalarProperty Name="Editora_livro" ColumnName="Editora_livro" />
+          <ScalarProperty Name="Autor_livro" ColumnName="Autor_livro" />
+          <ScalarProperty Name="Categoria_Id" ColumnName="Categoria_Id" />
+          <ScalarProperty Name="Capa_livro" ColumnName="Capa_livro" />
+          <ScalarProperty Name="Titulo_livro" ColumnName="Titulo_livro" />
+          <ScalarProperty Name="Id_livro" ColumnName="Id_livro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Membros">
+      <EntityTypeMapping TypeName="trabalhodaiModel.Membro">
+        <MappingFragment StoreEntitySet="T_membro">
+          <ScalarProperty Name="Contacto" ColumnName="Contacto" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="foto" ColumnName="foto" />
+          <ScalarProperty Name="UltimoNome" ColumnName="UltimoNome" />
+          <ScalarProperty Name="PrimeirNome" ColumnName="PrimeirNome" />
+          <ScalarProperty Name="Id_membro" ColumnName="Id_membro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utilizadores">
+      <EntityTypeMapping TypeName="trabalhodaiModel.Utilizador">
+        <MappingFragment StoreEntitySet="Utilizador">
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

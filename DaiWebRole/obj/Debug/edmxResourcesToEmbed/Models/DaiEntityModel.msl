@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="trabalhodaiModelStoreContainer" CdmEntityContainer="trabalhodaiEntities">
+    <EntitySetMapping Name="T_Fotos">
+      <EntityTypeMapping TypeName="trabalhodaiModel.T_Foto">
+        <MappingFragment StoreEntitySet="T_Foto">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Legenda" ColumnName="Legenda" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Galeria" ColumnName="Galeria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Galerias">
+      <EntityTypeMapping TypeName="trabalhodaiModel.T_Galeria">
+        <MappingFragment StoreEntitySet="T_Galeria">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="T_Videos">
+      <EntityTypeMapping TypeName="trabalhodaiModel.T_Video">
+        <MappingFragment StoreEntitySet="T_Video">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Legenda" ColumnName="Legenda" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Galeria" ColumnName="Galeria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

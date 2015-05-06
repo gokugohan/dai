@@ -1,0 +1,17 @@
+﻿@model IEnumerable<DaiWebRole.Azure.Log>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<h2>Registo de operações</h2>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <span class="text-success">@item.descricao</span>
+        </li>
+    }
+</ul>
+

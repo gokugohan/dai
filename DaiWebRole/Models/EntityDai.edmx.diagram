@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="218c55778adf4547afe7ed7c0d1e382a" Name="Diagram1">
+        <EntityTypeShape EntityType="trabalhodaiModel.Foto" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="trabalhodaiModel.Video" Width="1.5" PointX="3.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="trabalhodaiModel.Galeria" Width="1.5" PointX="2.25" PointY="0.625" />
+        <AssociationConnector Association="trabalhodaiModel.Galeria_Foto_FK" />
+        <AssociationConnector Association="trabalhodaiModel.Galeria_Video_FK" />
+        <EntityTypeShape EntityType="trabalhodaiModel.Categoria" Width="1.5" PointX="0.75" PointY="4.5" />
+        <EntityTypeShape EntityType="trabalhodaiModel.Emprestimo" Width="1.5" PointX="5.25" PointY="4.125" />
+        <EntityTypeShape EntityType="trabalhodaiModel.Livro" Width="1.5" PointX="3" PointY="4" />
+        <EntityTypeShape EntityType="trabalhodaiModel.Membro" Width="1.5" PointX="7.75" PointY="4.125" />
+        <AssociationConnector Association="trabalhodaiModel.fk_livro_categoria" />
+        <AssociationConnector Association="trabalhodaiModel.fk_emprestimo_livro" />
+        <AssociationConnector Association="trabalhodaiModel.fk_emprestimo_membro" />
+        <EntityTypeShape EntityType="trabalhodaiModel.Utilizador" Width="1.5" PointX="6.375" PointY="0.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DaiWebRole.Models.Livro>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Livro</h2>
+
+<p>
+    @Html.ActionLink("Novo livro", "Novo")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Capa_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Autor_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Editora_livro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Isbn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_categoria.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo_livro)
+        </td>
+        <td>
+            <img src="@item.Capa_livro" style="min-width:150px;min-height:150px; width:20%;height:20%;" />
+            @*@Html.DisplayFor(modelItem => item.Capa_livro)*@
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Autor_livro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Editora_livro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Isbn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_categoria.Nome)
+        </td>
+        <td>
+            @Html.ActionLink("Requisitar", "Requisitar", new { id = item.Id_livro })            
+            @if (User.Identity.IsAuthenticated && User.Identity.Name == "helder")
+            {
+                <span>|</span>
+                @Html.ActionLink("Editar", "Editar", new { id = item.Id_livro }) <span>|</span>
+                @Html.ActionLink("Eliminar", "Eliminar", new { id = item.Id_livro })
+            }
+            
+            
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="AzureCloudService1" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-06.2.4">
+  <Role name="DaiWebRole">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="con" value="UseDevelopmentStorage=true" />
+      <Setting name="StorageConString" value="DefaultEndpointsProtocol=https;AccountName=dai;AccountKey=QdFcCcq1a5oXifuE585LX1YpRosh/j/gEgmCmBf2TwnmUS6FEVyKMxvOeGRSPiMTvFOgLgHDnwUpsvfx0Pr0zg==" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>
